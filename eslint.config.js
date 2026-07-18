@@ -27,6 +27,8 @@ export default [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      // Require explicit parameter and return types at exported module boundaries.
+      "@typescript-eslint/explicit-module-boundary-types": "error",
     },
   },
 
