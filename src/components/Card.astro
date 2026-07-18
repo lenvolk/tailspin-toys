@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
+/** Props for the reusable panel container. */
 interface Props extends HTMLAttributes<'div'> {
     /** HTML element to render the panel as (e.g. 'div', 'section', 'article'). */
     as?: 'div' | 'section' | 'article' | 'aside';

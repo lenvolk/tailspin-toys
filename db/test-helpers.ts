@@ -8,7 +8,11 @@ import type { Database } from '../src/lib/db';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
-/** Create a fresh in-memory libSQL database with the schema migrated in. */
+/**
+ * Creates a fresh in-memory libSQL database with the schema migrated in.
+ *
+ * @returns A migrated database suitable for isolated tests.
+ */
 export async function createTestDatabase(): Promise<Database> {
     const client = createClient({ url: ':memory:' });
     const db = drizzle(client, { schema });

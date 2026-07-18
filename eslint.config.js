@@ -27,6 +27,8 @@ export default [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      // Exported APIs must declare their contracts explicitly.
+      "@typescript-eslint/explicit-module-boundary-types": "error",
     },
   },
 

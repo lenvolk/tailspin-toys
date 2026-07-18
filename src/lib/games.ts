@@ -51,12 +51,19 @@ function baseGamesQuery(db: Database) {
         .leftJoin(publishers, eq(games.publisherId, publishers.id));
 }
 
+/** Optional constraints supported by the game listing queries. */
 export interface GameFilters {
     categoryIds?: number[];
     publisherId?: number;
 }
 
-/** Games matching the optional category and publisher filters, ordered by title. */
+/**
+ * Returns games matching optional category and publisher filters.
+ *
+ * @param db Database connection used for the query.
+ * @param filters Optional category and publisher constraints.
+ * @returns Matching games ordered by title.
+ */
 export async function getGamesByFilters(
     db: Database,
     filters: GameFilters = {},
@@ -80,12 +87,23 @@ export async function getGamesByFilters(
     return rows.map(mapGame);
 }
 
-/** All games ordered by title. */
+/**
+ * Returns every game ordered by title.
+ *
+ * @param db Database connection used for the query.
+ * @returns All mapped games ordered by title.
+ */
 export async function getAllGames(db: Database): Promise<Game[]> {
     return getGamesByFilters(db);
 }
 
-/** Games in a category, ordered by title. */
+/**
+ * Returns games in a category ordered by title.
+ *
+ * @param db Database connection used for the query.
+ * @param categoryId Category identifier to match.
+ * @returns Matching games ordered by title.
+ */
 export async function getGamesByCategory(
     db: Database,
     categoryId: number,
@@ -93,7 +111,13 @@ export async function getGamesByCategory(
     return getGamesByFilters(db, { categoryIds: [categoryId] });
 }
 
-/** Games from a publisher, ordered by title. */
+/**
+ * Returns games from a publisher ordered by title.
+ *
+ * @param db Database connection used for the query.
+ * @param publisherId Publisher identifier to match.
+ * @returns Matching games ordered by title.
+ */
 export async function getGamesByPublisher(
     db: Database,
     publisherId: number,
@@ -101,13 +125,24 @@ export async function getGamesByPublisher(
     return getGamesByFilters(db, { publisherId });
 }
 
-/** All game ids ordered by title. */
+/**
+ * Returns all game identifiers ordered by their game titles.
+ *
+ * @param db Database connection used for the query.
+ * @returns Game identifiers ordered by title.
+ */
 export async function getAllGameIds(db: Database): Promise<number[]> {
     const rows = await db.select({ id: games.id }).from(games).orderBy(asc(games.title));
     return rows.map((row) => row.id);
 }
 
-/** A single game by id, or null when it does not exist. */
+/**
+ * Finds a single game by identifier.
+ *
+ * @param db Database connection used for the query.
+ * @param id Game identifier to find.
+ * @returns The mapped game, or null when no game matches.
+ */
 export async function getGameById(db: Database, id: number): Promise<Game | null> {
     const rows = await baseGamesQuery(db).where(eq(games.id, id)).limit(1);
     return rows.length > 0 ? mapGame(rows[0]) : null;
