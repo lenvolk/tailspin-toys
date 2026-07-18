@@ -55,6 +55,13 @@ export async function getAllGameIds(db: Database): Promise<number[]> {
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.
 
+### Public API Documentation
+
+- Every exported function in `db/` and `src/lib/` must have a TSDoc/JSDoc comment.
+- Describe the function's purpose and document every parameter with `@param`, including the injectable `db` argument and what database the caller should provide.
+- Document the returned value with `@returns`, especially for nullable lookups, ordered collections, and side-effecting operations.
+- Comments must explain intent or a non-obvious constraint rather than paraphrasing the implementation. Update or remove comments when the related code changes.
+
 ## Determinism
 
 Seed-derived values must be reproducible across builds. Derive star ratings from a stable hash of the title (`ratingFromTitle`) — **never** `Math.random()`.
@@ -66,4 +73,3 @@ Unit-test transforms directly and helpers against `createTestDatabase()`. See [`
 ## Type checking
 
 The data layer (`db/**/*.ts`, `src/lib/*.ts`) is type-checked by `npm run typecheck`, which runs the native **TypeScript 7** compiler (`tsgo`, from `@typescript/native-preview`) against `tsconfig.tsgo.json`. Keep helpers exported with explicit parameter and return types so `tsgo` can verify them. Linting is unaffected — ESLint + `typescript-eslint` still run on the classic `typescript` package.
-

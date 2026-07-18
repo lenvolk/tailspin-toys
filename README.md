@@ -110,6 +110,15 @@ The **quality-checks** skill (`.github/skills/quality-checks/SKILL.md`) wraps th
 - Diagnosing test failures (port conflicts, stale servers, flaky tests, CI divergence)
 - Validating readiness before commits, pushes, or merges
 
+## Coding Standards
+
+The repository's coding standards are maintained in [`.github/instructions/`](.github/instructions/). In particular:
+
+- Comments explain intent and design decisions, not mechanics or code that is already obvious.
+- Exported functions in `db/` and `src/lib/` use TSDoc/JSDoc with documented parameters and return values.
+- Reusable Astro components document their `Props` interfaces and public props.
+- TypeScript uses explicit module-boundary types, enforced by ESLint.
+
 ## License 
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) for the full terms.

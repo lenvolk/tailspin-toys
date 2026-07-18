@@ -20,6 +20,13 @@ Refer to technology-specific instruction files:
 
 ## Core Principles
 
+### Comments and Documentation
+
+- Comment intent, not mechanics: explain why a decision or non-obvious constraint exists; do not restate code that is already self-explanatory.
+- Keep comments accurate as part of the same change that modifies the related code. An outdated comment is a defect, not documentation.
+- Document reusable component contracts in the `Props` interface so callers can understand required values, optional values, and their meaning without reading the template.
+- Prefer TSDoc/JSDoc for public APIs and use `@param` and `@returns` when the parameter or return-value semantics are not obvious from the types.
+
 ### Testability
 
 - Every interactive element MUST include a `data-testid` attribute
