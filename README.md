@@ -114,6 +114,10 @@ The **quality-checks** skill (`.github/skills/quality-checks/SKILL.md`) wraps th
 - Diagnosing test failures (port conflicts, stale servers, flaky tests, CI divergence)
 - Validating readiness before commits, pushes, or merges
 
+### Issue triage board
+
+The shared **Issue triage board** canvas (`.github/extensions/issue-triage-board/extension.mjs`) provides a Kanban view of open repository issues. It highlights the three issues most likely to need attention and lets contributors add an issue directly to the current Copilot session context. The canvas is loaded automatically by Copilot CLI when working in this repository.
+
 ## License 
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) for the full terms.
