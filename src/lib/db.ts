@@ -4,6 +4,7 @@ import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import * as schema from '../../db/schema';
 
+/** Typed Drizzle database client used by build-time queries and tests. */
 export type Database = LibSQLDatabase<typeof schema>;
 
 /** Default local libSQL file used for dev/build when DATABASE_URL is unset. */
@@ -21,14 +22,23 @@ function ensureLocalDir(url: string): void {
     }
 }
 
-/** Create a Drizzle client for the given libSQL connection URL. */
+/**
+ * Creates a Drizzle client for a libSQL connection URL.
+ *
+ * @param url Connection URL; defaults to DATABASE_URL or the local database.
+ * @returns A typed Drizzle database client.
+ */
 export function createDatabase(url: string = process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL): Database {
     ensureLocalDir(url);
     const client = createClient({ url });
     return drizzle(client, { schema });
 }
 
-/** Shared singleton database client used by pages at build time. */
+/**
+ * Returns the shared database client used by build-time page queries.
+ *
+ * @returns The cached typed Drizzle database client.
+ */
 export function getDatabase(): Database {
     if (!cachedDb) {
         cachedDb = createDatabase();

@@ -20,6 +20,12 @@ Refer to technology-specific instruction files:
 
 ## Core Principles
 
+### Comments and documentation
+
+- Explain why a component or interaction exists when the reason is not obvious; do not add comments that paraphrase markup or utility classes.
+- Keep component API documentation in the `Props` interface so callers can understand supported variants, defaults, and accessibility expectations.
+- Treat stale comments as defects and update or remove them with the related change.
+
 ### Testability
 
 - Every interactive element MUST include a `data-testid` attribute
