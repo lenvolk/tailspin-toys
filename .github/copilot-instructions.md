@@ -51,6 +51,7 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 - Dynamic routes use `getStaticPaths()` + `export const prerender = true`
 - Provide a branded `404.astro` (unknown routes are real 404s under static output)
 - Only add a scoped Astro `<script>` when genuine client interactivity is required
+- For static catalog filtering, render the title-ordered dataset at build time and use a scoped DOM script with accessible native controls; do not add URL query parameters or runtime data fetching
 
 ### Styling
 
