@@ -44,6 +44,10 @@ npm run build      # prebuild migrates + seeds, then builds the static site
 npm run preview
 ```
 
+## Filtering games
+
+The home page provides client-side category and publisher filters. Categories support multi-select with OR semantics, while a selected publisher combines with the category selection. Use **All categories** or **Reset filters** to clear selections; filtering does not add URL query parameters and preserves the title order of the catalog.
+
 ## Database
 
 The SQLite database is built from `db/games.csv` — there is no live data to migrate.
